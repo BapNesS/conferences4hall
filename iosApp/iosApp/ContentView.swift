@@ -5,12 +5,16 @@ struct ContentView: View {
     var agendaRepository: AgendaRepository
 
 	var body: some View {
-        NavigationView {
-            AgendaVM(
-                viewModel: AgendaViewModel(repository: agendaRepository),
-                onTalkClicked: { String in }
-            )
-                .navigationBarTitle(Text("Agenda"))
+        TabView {
+            AgendaVM(agendaRepository: agendaRepository)
+                .tabItem {
+                    Label("Agenda", systemImage: "calendar")
+                }
+            
+            EventVM(agendaRepository: agendaRepository)
+                .tabItem {
+                    Label("Event", systemImage: "ticket")
+                }
         }
 	}
 }
